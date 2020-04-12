@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * A simple [Fragment] subclass.
  */
 class SecondFragment : Fragment() {
+
+    val args: SecondFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,9 +26,8 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button2.setOnClickListener {
+        textView.text = args.text
 
-        }
     }
 
 }
