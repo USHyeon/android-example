@@ -22,6 +22,7 @@
             android:layout_marginStart="16dp"
             android:ems="10"
             android:hint="Title"
+            android:text="@={viewModel.newTodo}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toStartOf="@+id/btn_insert"
             app:layout_constraintStart_toStartOf="parent"

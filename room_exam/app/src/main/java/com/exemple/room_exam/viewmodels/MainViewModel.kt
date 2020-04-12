@@ -14,9 +14,11 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     ).build()
 
     var todos: LiveData<List<Todo>>
+    var newTodo: String
 
     init {
         todos = getAll()
+        newTodo = ""
     }
 
     fun getAll(): LiveData<List<Todo>> {
