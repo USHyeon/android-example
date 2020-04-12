@@ -13,6 +13,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         AppDatabase::class.java, "database-name"
     ).build()
 
+    var todos: LiveData<List<Todo>>
+
+    init {
+        todos = getAll()
+    }
+
     fun getAll(): LiveData<List<Todo>> {
         return db.todoDao().getAll()
     }
