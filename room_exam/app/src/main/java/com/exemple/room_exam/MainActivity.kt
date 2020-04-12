@@ -23,15 +23,15 @@ class MainActivity : AppCompatActivity() {
             textview.text = it.toString()
         })
 
-        btn_add.setOnClickListener {
+        btn_insert.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) { // Dispatchers.IO : Background Thread
-                viewModel.insert(Todo(todo_edit.text.toString()))
+                viewModel.insert(Todo(edittext.text.toString()))
             }
         }
 
         btn_delete.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) { // Dispatchers.IO : Background Thread
-                viewModel.delete(Todo(todo_edit.text.toString()))
+                viewModel.delete(Todo(edittext.text.toString()))
             }
         }
 
