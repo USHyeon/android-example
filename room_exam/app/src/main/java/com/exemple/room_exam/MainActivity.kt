@@ -1,9 +1,8 @@
 package com.exemple.room_exam
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.exemple.room_exam.databinding.ActivityMainBinding
@@ -22,13 +21,6 @@ class MainActivity : AppCompatActivity() {
         val mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         binding.viewModel = mainViewModel
-
-        btn_insert.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                // Dispatchers.IO : Background Thread
-                mainViewModel.insert(Todo(edittext.text.toString()))
-            }
-        }
 
         btn_delete.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {

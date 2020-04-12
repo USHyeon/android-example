@@ -1,11 +1,12 @@
 package com.exemple.room_exam.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.*
 import androidx.room.Room
 import com.exemple.room_exam.AppDatabase
 import com.exemple.room_exam.models.Todo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application): AndroidViewModel(application) {
     private val db = Room.databaseBuilder(
@@ -25,11 +26,13 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         return db.todoDao().getAll()
     }
 
-    suspend fun insert(todo: Todo) {
-        return db.todoDao().insert(todo)
+    fun insert(todo: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.todoDao().insert(Todo(todo))
+        }
     }
 
-    suspend fun delete(todo: Todo) {
+    fun delete(todo: Todo) {
         return db.todoDao().delete(todo)
     }
 }
