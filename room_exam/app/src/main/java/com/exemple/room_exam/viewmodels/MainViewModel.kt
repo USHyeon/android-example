@@ -32,7 +32,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun delete(todo: Todo) {
-        return db.todoDao().delete(todo)
+    fun delete(todo: String) {
+        viewModelScope.launch(Dispatchers.IO){
+            db.todoDao().delete(todo)
+        }
     }
 }

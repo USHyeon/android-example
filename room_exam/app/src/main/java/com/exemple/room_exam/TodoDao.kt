@@ -15,8 +15,13 @@ interface TodoDao {
     @Update
     fun update(todo: Todo)
 
+    @Query("DELETE FROM Todo WHERE column_title = :todo")
+    fun delete(todo: String)
+
+/*
     @Delete
     fun delete(todo: Todo)
+*/
 
 
 }

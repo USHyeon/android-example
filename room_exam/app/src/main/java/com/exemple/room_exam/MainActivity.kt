@@ -22,14 +22,5 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewModel = mainViewModel
 
-        btn_delete.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                // Dispatchers.IO : Background Thread
-                mainViewModel.delete(Todo(edittext.text.toString()))
-            }
-        }
-
     }
-
-
 }
