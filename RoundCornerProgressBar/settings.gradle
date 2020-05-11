@@ -1,0 +1,2 @@
+rootProject.name='RoundCornerProgressBar'
+include ':app'
