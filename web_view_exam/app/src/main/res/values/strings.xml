@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WebViewExam</string>
+
+    <string name="text_back">뒤로가기</string>
+    <string name="text_forward">앞으로가기</string>
+    <string name="text_refresh">새로고침</string>
+
+</resources>
