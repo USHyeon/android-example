@@ -59,6 +59,7 @@
             android:theme="@style/ButtonStyle" />
 
         <Button
+            android:id="@+id/facebook_signin_button"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
