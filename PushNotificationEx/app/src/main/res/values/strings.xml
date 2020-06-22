@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PushNotificationEx</string>
+    <string name="channel_name">채널 명</string>
+    <string name="channel_description">채널 내용</string>
+
+    <string name="msg_token_fmt">msg_token_fmt</string>
+</resources>
