@@ -79,7 +79,10 @@ class MainActivity : AppCompatActivity() {
             mNoti.notify(notifyID, notification)
         }
         button2.setOnClickListener {
-
+            OneSignal.sendTag(
+                "testKey",
+                "testValue"
+            )
 
         }
         button3.setOnClickListener {
