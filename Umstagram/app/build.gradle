@@ -36,6 +36,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:19.3.1'                           //firebase
     implementation 'com.google.firebase:firebase-storage:19.1.1'                        //사진 업로드 할 수 있는 스토리지.
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'                      //사진을 체계적으로 데이터로 관리할 수 있도록.
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
     //facebook login
 
