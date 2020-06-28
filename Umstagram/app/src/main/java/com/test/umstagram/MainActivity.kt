@@ -58,5 +58,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.setOnNavigationItemSelectedListener(this)
 
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
+
+        //메인화면이 뜨면 DetailViewFragment 로 연결되도록 함.
+        bottom_navigation.selectedItemId = R.id.action_home
     }
 }
