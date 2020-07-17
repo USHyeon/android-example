@@ -1,4 +1,4 @@
-package com.spacetalk.pushnotificationex.service
+package com.spacetalk.pushnotificationex.notification
 
 import com.onesignal.OSNotification
 import com.onesignal.OneSignal

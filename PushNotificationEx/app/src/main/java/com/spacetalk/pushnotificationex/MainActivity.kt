@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.google.firebase.iid.FirebaseInstanceId
+import com.onesignal.OSNotification
+import com.onesignal.OSNotificationAction
+import com.onesignal.OSNotificationOpenResult
 import com.onesignal.OneSignal
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -87,5 +90,4 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 }
