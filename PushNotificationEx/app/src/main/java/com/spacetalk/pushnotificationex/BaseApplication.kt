@@ -3,6 +3,8 @@ package com.spacetalk.pushnotificationex
 import android.app.Application
 import android.content.Context
 import com.onesignal.OneSignal
+import com.spacetalk.pushnotificationex.service.NotificationOpenedHandler
+import com.spacetalk.pushnotificationex.service.NotificationReceivedHandler
 
 class BaseApplication : Application() {
     companion object {
@@ -17,6 +19,8 @@ class BaseApplication : Application() {
 
         // OneSignal Initialization
         OneSignal.startInit(this)
+            .setNotificationReceivedHandler(NotificationReceivedHandler())
+            .setNotificationOpenedHandler(NotificationOpenedHandler())
             .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
             .unsubscribeWhenNotificationsAreDisabled(true)
             .init();
