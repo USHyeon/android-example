@@ -1,6 +1,5 @@
 package com.spacetalk.pushnotificationex
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -10,9 +9,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.onesignal.OSNotification
+import com.onesignal.OSNotificationAction
 import com.onesignal.OSNotificationOpenResult
 import com.onesignal.OneSignal
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,22 +24,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Timber.plant(Timber.DebugTree())
 
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
-            task ->
-                if (!task.isSuccessful) {
-                    Timber.d("FCM Log, getInstanceId failed ${task.exception}")
-                    return@addOnCompleteListener
-                }
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.d("FCM Log, getInstanceId failed ${task.exception}")
+                return@addOnCompleteListener
+            }
 
-                val token = task.result?.token
-                Timber.d("FCM Log, FCM 토큰 $token")
-                Toast.makeText(this, token, Toast.LENGTH_SHORT).show()
+            val token = task.result?.token
+            Timber.d("FCM Log, FCM 토큰 $token")
+            Toast.makeText(this, token, Toast.LENGTH_SHORT).show()
         }
 
         OneSignal.idsAvailable { userId, registrationId ->
             var text = "OneSignal UserId:\n$userId\n\n"
 
-            text += if(registrationId != null) {
+            text += if (registrationId != null) {
                 "Google Registration Id:\n$registrationId"
             } else {
                 "Google Registration Id:\nCould not subscribe for push"
@@ -92,5 +90,4 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 }
