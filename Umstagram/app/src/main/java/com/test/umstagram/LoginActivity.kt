@@ -36,7 +36,12 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         email_login_button.setOnClickListener {
-            signinAndSignup()
+            if (email_edittext.text.isNotEmpty() && password_edittext.text.isNotEmpty()) {
+                signinAndSignup()
+            } else {
+                if (email_edittext.text.isEmpty()) Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                else if (password_edittext.text.isEmpty()) Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
         //5.구글 로그인 옵션
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -138,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //2.회원가입 코드를 넣어주도록 한다
-    fun signinAndSignup() {
+    private fun signinAndSignup() {
         auth?.createUserWithEmailAndPassword(
             email_edittext.text.toString(),
             password_edittext.text.toString()
