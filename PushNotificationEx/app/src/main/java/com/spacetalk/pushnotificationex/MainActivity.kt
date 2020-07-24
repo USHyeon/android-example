@@ -49,11 +49,11 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             //알림 채널 구성 및 생성
             val mNoti = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val id = "my_channel_01"
-            val name = "channel name"
-            val desc = "channel description text"
-            val importance = NotificationManager.IMPORTANCE_LOW
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val id = "my_channel_01"
+                val name = "channel name"
+                val desc = "channel description text"
+                val importance = NotificationManager.IMPORTANCE_LOW
                 //알림채널 생성
                 val mChannel = NotificationChannel(id, name, importance).apply {
                     this.description = desc
