@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "com.umssungs.sthub"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled false
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+        //***** required ****//
+        implementation 'com.alibaba:fastjson:1.1.67.android'
+        implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.14.9'
+        implementation 'com.tuya.smart:tuyasmart:3.17.6'
+        implementation 'com.tuya.smart:tuyasmart-shortcutparser:0.0.1'
+        //***** required ****//
+
+        //***** not required ****//
+        implementation 'com.android.support:appcompat-v7:28.0.0'
+        implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+        implementation 'org.greenrobot:eventbus:3.0.0'
+        implementation 'com.wnafee:vector-compat:1.0.5'
+        implementation 'com.jakewharton:butterknife:8.8.1'
+        annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+        implementation 'com.kyleduo.switchbutton:library:1.4.2'
+        implementation "com.android.support:recyclerview-v7:28.0.0"
+        implementation 'com.squareup.picasso:picasso:2.5.2'
+        implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+        // For QRCode Login
+        implementation 'com.google.zxing:core:3.2.1'
+
+        //***** not required ****//
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'com.android.support.constraint:constraint-layout:+'
+    androidTestImplementation 'junit:junit:4.12'
+}
