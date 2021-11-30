@@ -122,12 +122,6 @@ class MainActivity : AppCompatActivity() {
     // 그래서 이전에 측정됐던 값을 먼저 가져와서 지도에다 적용하고
     // 그리고 나서 gps 위치 측정을 다시 진행 한다.
     fun setMyLocation(location: Location) {
-        val latitude = location.latitude
-        val longitude = location.longitude
-
-//        Log.d("GPS Location", "위도: ${latitude}")
-//        Log.d("GPS Location", "경도: ${longitude}")
-
         // 위도와 경도를 관리하는 객체로 만들어줌.
         var position = LatLng(location.latitude, location.longitude)
         // camera update 객체
@@ -138,6 +132,26 @@ class MainActivity : AppCompatActivity() {
             this.moveCamera(update1)
             this.animateCamera(update2)
         }
+
+        // 권한 확인 필요
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // 두개의 권한 확인
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                return
+            }
+            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                return
+            }
+        }
+
+        // 현재 위치 및 방향 표시
+        googleMap.isMyLocationEnabled = true
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+//        googleMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+//        googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+//        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
     }
 
     inner class GetMyLocationListener : LocationListener {
