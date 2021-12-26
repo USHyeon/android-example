@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.room.Room
 
 class MainActivity : AppCompatActivity() {
@@ -20,11 +21,13 @@ class MainActivity : AppCompatActivity() {
         val todoEdit = findViewById<EditText>(R.id.todo_edit)
         val resultText = findViewById<TextView>(R.id.result_text)
         val addButton = findViewById<Button>(R.id.add_button)
-        resultText.text = db.todoDao().getAll().toString()
+
+        db.todoDao().getAll().observe(this, Observer {
+            resultText.text = it.toString()
+        })
 
         addButton.setOnClickListener {
             db.todoDao().insert(Todo(todoEdit.text.toString()))
-            resultText.text = db.todoDao().getAll().toString()
          }
 
     }
