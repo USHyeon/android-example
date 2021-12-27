@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity() {
         googleMap.apply {
             this.moveCamera(update1)
             this.animateCamera(update2)
-        }
 
         // 권한 확인 필요
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -168,7 +167,8 @@ class MainActivity : AppCompatActivity() {
 
         var thread = NetworkThread(location.latitude, location.longitude)
         thread.start()
-    }
+        }
+}
 
     inner class GetMyLocationListener : LocationListener {
         @SuppressLint("MissingPermission")
