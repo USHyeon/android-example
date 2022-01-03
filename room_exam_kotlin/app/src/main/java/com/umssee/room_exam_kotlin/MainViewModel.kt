@@ -13,14 +13,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         application,
         AppDatabase::class.java, "todo-db-kotlin"
     ).build()
+    var todos: LiveData<List<Todo>>
+    var newTodo: String = ""
 
-    fun getAll(): LiveData<List<Todo>> {
+    init {
+        todos = getAll()
+    }
+
+    private fun getAll(): LiveData<List<Todo>> {
         return db.todoDao().getAll()
     }
 
-    fun insert(todo: Todo) {
+    fun insert(todo: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            db.todoDao().insert(todo)
+            db.todoDao().insert(Todo(todo))
         }
     }
 

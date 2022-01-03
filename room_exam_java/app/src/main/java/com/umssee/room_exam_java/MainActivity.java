@@ -1,42 +1,22 @@
 package com.umssee.room_exam_java;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.loader.content.AsyncTaskLoader;
-import androidx.room.Room;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.umssee.room_exam_java.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    private EditText mTodoEditText;
-    private TextView mResultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTodoEditText = findViewById(R.id.todo_edit);
-        mResultTextView = findViewById(R.id.result_text);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setLifecycleOwner(this);
 
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        // UI 갱신.
-        viewModel.getAll().observe(this, todos -> {
-            mResultTextView.setText(todos.toString());
-        });
-
-        // 버튼 클릭시 DB에 insert
-        findViewById(R.id.add_button).setOnClickListener(view -> {
-            viewModel.insert(new Todo(mTodoEditText.getText().toString()));
-        });
+        binding.setViewModel(viewModel);
     }
 }
