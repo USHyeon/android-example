@@ -16,6 +16,7 @@ import com.example.maskinfojava.model.StoreInfo;
 import com.example.maskinfojava.repository.MaskService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.actionRefresh:
-                
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -70,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<StoreInfo> call, Response<StoreInfo> response) {
                 List<Store> items = response.body().getStores();
-                storeAdapter.updateItems(items);
+                storeAdapter.updateItems(items.stream()
+                        .filter(item -> item.getRemainStat() != null)
+                        .collect(Collectors.toList()));
                 getSupportActionBar().setTitle("마스크 재고 있는 곳: " + items.size());
             }
 

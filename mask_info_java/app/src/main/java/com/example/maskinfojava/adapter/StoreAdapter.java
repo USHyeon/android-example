@@ -1,5 +1,6 @@
 package com.example.maskinfojava.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,38 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
         holder.tvName.setText(store.getName());
         holder.tvAddr.setText(store.getAddr());
         holder.tvDistance.setText("0.0km");
-        holder.tvRemain.setText(store.getRemainStat());
-        holder.tvCount.setText("100개 이상");
+
+        String remainStat = store.getRemainStat();
+        String count = "알 수 없음";
+        int color = Color.GRAY;
+        switch (store.getRemainStat()) {
+            case "plenty":
+                remainStat = "충분";
+                count = "100개 이상";
+                color = Color.GREEN;
+                break;
+            case "some":
+                remainStat = "여유";
+                count = "30개 이상";
+                color = Color.YELLOW;
+                break;
+            case "few":
+                remainStat = "매진 임박";
+                count = "2개 이상";
+                color = Color.RED;
+                break;
+            case "empty":
+                remainStat = "재고 없음";
+                count = "1개 이하";
+                color = Color.GRAY;
+                break;
+            default:
+        }
+
+        holder.tvRemain.setText(remainStat);
+        holder.tvCount.setText(count);
+
+        holder.tvRemain.setTextColor(color);
     }
 
     @Override
