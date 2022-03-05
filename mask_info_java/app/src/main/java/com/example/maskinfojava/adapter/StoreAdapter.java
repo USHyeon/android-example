@@ -56,7 +56,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
 
         holder.tvName.setText(store.getName());
         holder.tvAddr.setText(store.getAddr());
-        holder.tvDistance.setText("0.0km");
+        holder.tvDistance.setText(String.format("%.2fkm", store.getDistance()));
 
         String remainStat = store.getRemainStat();
         String count = "알 수 없음";

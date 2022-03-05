@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.maskinfojava.model.Store;
 import com.example.maskinfojava.model.StoreInfo;
 import com.example.maskinfojava.repository.MaskService;
+import com.example.maskinfojava.utils.LocationDistance;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +43,15 @@ public class MainViewModel extends ViewModel {
                 Log.d(TAG, "++ API onResponse");
                 List<Store> items = response.body().getStores().stream()
                         .filter(item -> item.getRemainStat() != null)
+                        .filter(item -> !item.getRemainStat().equals("empty"))
                         .collect(Collectors.toList());
+
+                for (Store store : items) {
+                    // 위도경도로 거리 구하기
+                    double distance = LocationDistance.distance(location.getLatitude(), location.getLongitude(), store.getLat(), store.getLng(), "k");
+                    store.setDistance(distance);
+                }
+
                 itemLiveData.postValue(items);
             }
 
