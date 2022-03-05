@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         PermissionListener permissionlistener = new PermissionListener() {
@@ -85,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                     // Got last known location. In some rare situations this can be null.
                     if (location != null) {
                         Log.d(TAG, "performAction: " + location.getLatitude() + " | " + location.getLongitude());
+
+                        // FIXME: EXAMPLE
+//                        location.setLatitude(37.188078);
+//                        location.setLongitude(127.043002);
+
+                        mainViewModel.location = location;
+                        mainViewModel.fetchStoreInfo();
                     }
                 });
 
@@ -93,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         StoreAdapter storeAdapter = new StoreAdapter();
         mainRecyclerView.setAdapter(storeAdapter);
 
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         mainViewModel.itemLiveData.observe(this, stores -> {
             storeAdapter.updateItems(stores);
             getSupportActionBar().setTitle("마스크 재고 있는 곳: " + stores.size());
