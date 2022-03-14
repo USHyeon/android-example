@@ -36,10 +36,10 @@ class StoreAdapter : RecyclerView.Adapter<StoreViewHolder>() {
         holder.tvName.text = store.name
         holder.tvAddr.text = store.addr
         holder.tvDistance.text = "0.0km"
-        var remainStat: String = store.remainStat
+        var remainStat: String? = store.remain_stat
         var count = "알 수 없음"
         var color = Color.GRAY
-        when (store.remainStat) {
+        when (store.remain_stat) {
             "plenty" -> {
                 remainStat = "충분"
                 count = "100개 이상"

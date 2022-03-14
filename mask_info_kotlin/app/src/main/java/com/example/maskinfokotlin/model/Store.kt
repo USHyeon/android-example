@@ -7,7 +7,9 @@ data class Store(
     var lat: Double,
     var lng: Double,
     var name: String,
-    var remainStat: String,
+    var remain_stat: String?,
     var stockAt: String,
     var type: String,
+
+    val distance: Double
 )
