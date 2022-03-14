@@ -72,4 +72,14 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("count", mainViewModel.count)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        mainViewModel.count = savedInstanceState.getInt("count")
+    }
 }
