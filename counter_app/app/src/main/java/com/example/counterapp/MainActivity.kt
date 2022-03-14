@@ -6,17 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
 
+    private val mainViewModel: MainViewModel by viewModels()
+
     lateinit var tvCounter: TextView
     lateinit var btnIncrease: Button
     lateinit var btnDecrease: Button
-
-    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +29,15 @@ class MainActivity : AppCompatActivity() {
         btnIncrease = findViewById(R.id.btnIncrease)
         btnDecrease = findViewById(R.id.btnDecrease)
 
+        tvCounter.text = "${mainViewModel.count}"
+
         btnIncrease.setOnClickListener {
-            count++
-            tvCounter.text = "$count"
+            mainViewModel.count++
+            tvCounter.text = "${mainViewModel.count}"
         }
         btnDecrease.setOnClickListener {
-            count--
-            tvCounter.text = "$count"
+            mainViewModel.count--
+            tvCounter.text = "${mainViewModel.count}"
         }
 
         // 화면 초기화 확인
