@@ -11,5 +11,5 @@ data class Store(
     var stockAt: String,
     var type: String,
 
-    val distance: Double
+    var distance: Double?
 )

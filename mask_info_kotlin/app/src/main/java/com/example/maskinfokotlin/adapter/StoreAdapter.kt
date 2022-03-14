@@ -35,7 +35,7 @@ class StoreAdapter : RecyclerView.Adapter<StoreViewHolder>() {
         val store: Store = mItems[position]
         holder.tvName.text = store.name
         holder.tvAddr.text = store.addr
-        holder.tvDistance.text = "0.0km"
+        holder.tvDistance.text = String.format("%.2fkm", store.distance)
         var remainStat: String? = store.remain_stat
         var count = "알 수 없음"
         var color = Color.GRAY
