@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.counterapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,29 +17,28 @@ class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
 
+    private lateinit var binding: ActivityMainBinding
+
     lateinit var tvCounter: TextView
     lateinit var btnIncrease: Button
     lateinit var btnDecrease: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
 
-        Log.d(TAG, "onCreate: ")
+        binding.viewModel = mainViewModel
 
         tvCounter = findViewById(R.id.tvCounter)
         btnIncrease = findViewById(R.id.btnIncrease)
         btnDecrease = findViewById(R.id.btnDecrease)
 
-        tvCounter.text = "${mainViewModel.count}"
-
         btnIncrease.setOnClickListener {
-            mainViewModel.count++
-            tvCounter.text = "${mainViewModel.count}"
+            mainViewModel.countIncrease()
         }
         btnDecrease.setOnClickListener {
-            mainViewModel.count--
-            tvCounter.text = "${mainViewModel.count}"
+            mainViewModel.countDecrease()
         }
 
         // 화면 초기화 확인
@@ -71,15 +72,5 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("count", mainViewModel.count)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        mainViewModel.count = savedInstanceState.getInt("count")
     }
 }
