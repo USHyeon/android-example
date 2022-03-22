@@ -7,24 +7,14 @@ import com.example.maskinfokotlin.model.Store
 import com.example.maskinfokotlin.model.StoreInfo
 import com.example.maskinfokotlin.repository.MaskService
 import com.example.maskinfokotlin.util.LocationDistance
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val service: MaskService) : ViewModel() {
     val itemLiveData = MutableLiveData<List<Store>?>()
     val loadingLiveData = MutableLiveData<Boolean>()
-
-    private val service: MaskService
-
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(MaskService.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-
-        service = retrofit.create(MaskService::class.java)
-    }
 
     fun fetchStoreInfo() {
         // 로딩 시작
