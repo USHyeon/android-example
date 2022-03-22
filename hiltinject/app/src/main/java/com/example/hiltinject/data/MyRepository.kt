@@ -1,6 +1,5 @@
-package com.example.hiltinject.ui.data
+package com.example.hiltinject.data
 
-import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Singleton
 

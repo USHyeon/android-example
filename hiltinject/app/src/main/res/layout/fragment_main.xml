@@ -17,6 +17,7 @@
 
             android:inputType="textCapSentences"
             android:text="Activity"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_fragment"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences"
             android:text="Fragment"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_activity"

@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.hiltinject.R
-import com.example.hiltinject.ui.data.MyRepository
+import com.example.hiltinject.data.MyRepository
+import com.example.hiltinject.di.qualifier.ActivityHash
+import com.example.hiltinject.di.qualifier.AppHash
 import com.example.hiltinject.ui.second.SecondActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,6 +20,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     @Inject
     lateinit var repository: MyRepository
+
+    @AppHash
+    @Inject
+    lateinit var applicationHash: String
+
+    @ActivityHash
+    @Inject
+    lateinit var activityHash: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +43,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
 
         Log.d("MainFragment", "${repository.hashCode()}")
+        Log.d("MainFragment", "appHash: $applicationHash")
+        Log.d("MainFragment", "ActivityHash: $activityHash")
     }
 
 }
