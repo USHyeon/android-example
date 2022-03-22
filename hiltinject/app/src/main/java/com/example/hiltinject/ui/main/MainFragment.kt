@@ -3,20 +3,25 @@ package com.example.hiltinject.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hiltinject.R
 import com.example.hiltinject.data.MyRepository
 import com.example.hiltinject.di.qualifier.ActivityHash
 import com.example.hiltinject.di.qualifier.AppHash
 import com.example.hiltinject.ui.second.SecondActivity
+import com.example.hiltinject.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
+    private val activityViewModel by activityViewModels<MainViewModel>()
+    private val viewModel by viewModels<MainViewModel>()
 
     @Inject
     lateinit var repository: MyRepository
@@ -45,6 +50,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         Log.d("MainFragment", "${repository.hashCode()}")
         Log.d("MainFragment", "appHash: $applicationHash")
         Log.d("MainFragment", "ActivityHash: $activityHash")
+        Log.d("MainFragment", "ViewModel: ${viewModel.getRepositoryHash()}")
+        Log.d("MainFragment", "ActivityViewModel: ${activityViewModel.getRepositoryHash()}")
     }
 
 }
