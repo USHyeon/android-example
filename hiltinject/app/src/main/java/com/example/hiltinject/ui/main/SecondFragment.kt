@@ -1,6 +1,7 @@
 package com.example.hiltinject.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,14 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.hiltinject.R
 import com.example.hiltinject.ui.data.MyRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SecondFragment : Fragment(R.layout.fragment_second) {
 
-    val repository = MyRepository()
+    @Inject
+    lateinit var repository: MyRepository
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,5 +26,6 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
         btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_secondFragment_to_mainFragment)
         }
+        Log.d("SecondFragment", "${repository.hashCode()}")
     }
 }
