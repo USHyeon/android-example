@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.hiltinject.R
+import com.example.hiltinject.ui.data.MyRepository
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
+
+    val repository = MyRepository()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
